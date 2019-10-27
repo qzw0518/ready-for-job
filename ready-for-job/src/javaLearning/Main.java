@@ -1,8 +1,4 @@
-package javabase;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Stack;
+package javaLearning;
 
 public class Main{
     public static void main(String[] args){

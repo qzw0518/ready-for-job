@@ -10,6 +10,7 @@ package algorithm;
  */
 public class OddEvenInOrder {
     public static void main(String[] args){
+
         int[] a = {3,1,2,4,5,6,2,7,9};
         reOrderArray(a);
     }

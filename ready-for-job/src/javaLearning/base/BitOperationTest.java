@@ -1,4 +1,4 @@
-package javabase;
+package javaLearning.base;
 
 /**
  * @description: java位运算
