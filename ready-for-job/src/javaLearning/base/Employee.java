@@ -15,6 +15,16 @@ public class Employee {
 
     Date hireDate;
 
+    public Employee(String name, float salary, Date hireDate) {
+        this.name = name;
+        this.salary = salary;
+        this.hireDate = hireDate;
+    }
+
+    public String getName(boolean confirm){
+        return this.name;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

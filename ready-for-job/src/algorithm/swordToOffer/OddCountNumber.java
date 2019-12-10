@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.swordToOffer;
 
 /**
  * @description: 找出数组中只出现一次的那个数，其余都出现两次。要求时间复杂度是O(n)，空间复杂度是O(1)。

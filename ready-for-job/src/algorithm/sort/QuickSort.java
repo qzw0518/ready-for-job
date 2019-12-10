@@ -9,7 +9,7 @@ import java.util.Arrays;
  */
 public class QuickSort {
     public static void main(String[] args){
-        int[] a = {3,2,1,4,6,5};
+        int[] a = {7,3,2,1,4,6,5};
         quickSort(a,0,a.length-1);
         System.out.println(Arrays.toString(a));
     }
@@ -24,14 +24,14 @@ public class QuickSort {
                     j--;
                 }
                 if (i < j){
-                    a[i] = a[j];    //第一小于x的数挪到最前面
+                    a[i] = a[j];    //第一小于x的数挪到分界点
                     i++;
                 }
                 while (i < j && a[i] < x){  //从左向右找第一个比大于x的数
                     i++;
                 }
                 if (i < j){
-                    a[j] = a[i];    //第一个大于x的数挪到最后面
+                    a[j] = a[i];    //第一个大于x的数挪到分界点
                     j--;
                 }
             }

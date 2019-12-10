@@ -1,4 +1,4 @@
-package datastructure;
+package algorithm.datastructure;
 
 /**
  * @author zhiwen.qi/qiwonder@163.com
@@ -46,9 +46,3 @@ public class BTreeMinDepth {
 
 }
 
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-}

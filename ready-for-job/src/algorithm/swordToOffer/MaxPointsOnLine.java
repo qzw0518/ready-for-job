@@ -1,4 +1,4 @@
-package algorithm;
+package algorithm.swordToOffer;
 
 /**
  * @author zhiwen.qi@hand-china.com
