@@ -20,14 +20,16 @@ public class QuickSort {
             int j = right;  //右游标初始化
             int x = a[i];  //x作为快排每一趟的标定值
             while (i < j){
-                while (i < j && a[j] > x) {  //从右往左找第一个小于X数
+                //从右往左找第一个小于X数，加i < j限制是因为内层循环一直在变化i和j，防止i超过j。
+                while (i < j && a[j] > x) {
                     j--;
                 }
                 if (i < j){
                     a[i] = a[j];    //第一小于x的数挪到分界点
                     i++;
                 }
-                while (i < j && a[i] < x){  //从左向右找第一个比大于x的数
+                //从左向右找第一个比大于x的数,如果不加i < j限制。如果x为最大元素，此时会一直加到数组末尾并且再+1，超出数组范围
+                while (i < j && a[i] < x){
                     i++;
                 }
                 if (i < j){
