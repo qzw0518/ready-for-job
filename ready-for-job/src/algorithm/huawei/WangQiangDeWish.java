@@ -37,17 +37,15 @@ public class WangQiangDeWish {
     }
 
     /**
-     * 计算最大值.动态规划
-     *
-     * @param budget 预算
-     * @param wantCount 希望购买个数
-     * @param itemInfo 物品信息，二维数组。
-     *                 itemInfo[i][0]表示第i个物品价格
-     *                 itemInfo[i][1]表示第i个物品重要程度
-     *                 itemInfo[i][2]表示第i个物品主/附件
-     * @return 最大值
+     * 计算最大价值。sum(v[i]*p[i])。动态规划
+     * @param n 总钱数
+     * @param m 希望购买物品数量
+     * @param v 物品价格数组
+     * @param p 物品重要度数组
+     * @param q 物品性质数组
+     * @return
      */
-    public static int getMax(int budget, int wantCount, int[][] itemInfo){
+    public static int getMaxValue(int n, int m, int[] v, int[] p, int[] q) {
         return -1;
     }
 
