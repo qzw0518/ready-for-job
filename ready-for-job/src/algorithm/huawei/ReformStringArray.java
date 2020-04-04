@@ -27,16 +27,15 @@ import java.util.Scanner;
 public class ReformStringArray {
 
     public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
-//        ReformStringArray rfs = new ReformStringArray();
-//        String first = rfs.handleString(sc.nextLine());
-//        String second = rfs.handleString(sc.nextLine());
-//        sc.close();
-//        String total = first + second;
-//        for (int i = 0; i < total.length(); i+=8) {
-//            System.out.println(total.substring(i,i+8));
-//        }
-        System.out.println("guwldvzrsfurobidegiyazkggfpgmyhlrbfjrjerrbnjdenrdxjfmrhtumfdsedkcmthphgavzxlmpcpwbkwsvplhmkbkgkw".length());
+        Scanner sc = new Scanner(System.in);
+        ReformStringArray rfs = new ReformStringArray();
+        String first = rfs.handleString(sc.nextLine());
+        String second = rfs.handleString(sc.nextLine());
+        sc.close();
+        String total = first + second;
+        for (int i = 0; i < total.length(); i+=8) {
+            System.out.println(total.substring(i,i+8));
+        }
     }
 
     public String handleString(String s) {

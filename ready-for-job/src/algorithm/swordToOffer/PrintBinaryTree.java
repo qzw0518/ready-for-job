@@ -1,6 +1,6 @@
 package algorithm.swordToOffer;
 
-import algorithm.datastructure.TreeNode;
+import algorithm.datastructure.tree.TreeNode;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,7 +1,12 @@
 package javaLearning.swingLearning.layout;
 
 import javax.swing.*;
+import javax.swing.text.PlainDocument;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * @author zhiwen.qi
@@ -13,7 +18,15 @@ public class LayoutTest {
     public static void main(String[] args) {
 //        createFrame("流式布局测试",new LayoutTest().flowLayoutTest());
 //        createFrame("网格布局测试",new LayoutTest().gridLayoutTest());
-        createFrame("网格袋布局测试", new LayoutTest().gridBagTest());
+//        createFrame("网格袋布局测试", new LayoutTest().gridBagTest());
+//        createFrame("test", combo());
+//        createFrame("test", custom());1111
+//        createFrame("te",createMyTextField());
+        FormatDocument f1 = new FormatDocument(new JTextField());
+        if (f1 instanceof PlainDocument) {
+            System.out.println("yes");
+        }
+
     }
 
     public static void createFrame(String title,JPanel panel) {
@@ -29,6 +42,137 @@ public class LayoutTest {
             }
         });
 
+    }
+
+    public static JPanel createMyTextField() {
+        JTextField textField = new JTextField();
+        textField.setColumns(8);
+        textField.setDocument(new FormatDocument(textField, 0, 10000));
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("display");
+        JButton btn = new JButton("click");
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label.setText(textField.getText());
+            }
+        });
+        panel.add(textField);
+        panel.add(btn);
+        panel.add(label);
+        panel.add(new JTextField(8));
+        return panel;
+    }
+
+    public static JPanel custom() {
+        JPanel panel = new JPanel();
+
+        JPanel innerPanel = new JPanel();
+        JTextField textField = new JTextField(8);
+        textField.setText("0");
+
+        JRadioButton radioButton1 = new JRadioButton("Kbps");
+        JRadioButton radioButton2 = new JRadioButton("Mbps");
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioButton2);
+        buttonGroup.add(radioButton1);
+        radioButton2.setSelected(true);
+
+        innerPanel.add(textField);
+        innerPanel.add(radioButton2);
+        innerPanel.add(radioButton1);
+//        setEnablePanel(innerPanel, false);
+
+        JButton btn = new JButton("getValue");
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textField.setText(String.valueOf(getValue(innerPanel)));
+            }
+        });
+        JButton btn2 = new JButton("enable");
+        btn2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                setEnablePanel(innerPanel, true);
+                setValue(innerPanel, 1021);
+            }
+        });
+        panel.add(innerPanel);
+        panel.add(btn);
+        panel.add(btn2);
+
+        return panel;
+    }
+
+    public static void setValue(JPanel panel, int value) {
+        JRadioButton radioButton = (JRadioButton) panel.getComponent(2);
+        radioButton.setSelected(true);
+        JTextField textField = (JTextField) panel.getComponent(0);
+        textField.setText(String.valueOf(value));
+    }
+
+    public static int getValue(JPanel panel) {
+        Component[] components = panel.getComponents();
+        int input = 0;
+        int unit = 0;
+        for (int i = 0; i < components.length; i++) {
+            if (components[i] instanceof JTextField) {
+                JTextField textField = ((JTextField) components[i]);
+                input =Integer.valueOf(textField.getText());
+            }else if (components[i] instanceof JRadioButton) {
+                JRadioButton radioButton = (JRadioButton) components[i];
+                if (radioButton.isSelected()) {
+                    if ("Mbps".equals(radioButton.getText())) {
+                        unit = 1;
+                    }else {
+                        unit = 2;
+                    }
+                }
+            }
+        }
+        if (unit == 1) {
+            return input * 1024;
+        }else {
+            return input;
+        }
+    }
+
+    public static void setEnablePanel(JPanel panel, boolean enable) {
+        for (Component c : panel.getComponents()) {
+            c.setEnabled(enable);
+        }
+    }
+
+    public static JPanel combo() {
+        JPanel panel = new JPanel(new BorderLayout());
+        JComboBox comboBox = new JComboBox();
+        comboBox.setEditable(true);
+
+        comboBox.setEditor(new MyComboEditor());
+        comboBox.addItem(new NameValue(16 + "kbs", 16));
+        comboBox.addItem(1);
+        comboBox.addItem(2);
+        comboBox.setSelectedItem(0);
+        panel.add(comboBox, BorderLayout.NORTH);
+        JButton btn = new JButton("get");
+        JLabel label = new JLabel("value");
+        btn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Object selected = comboBox.getSelectedItem();
+                if (selected instanceof NameValue) {
+                    JOptionPane.showMessageDialog(null,"Selected Item: Name Value");
+                    label.setText(String.valueOf(((NameValue) selected).getValue()));
+                }else {
+                    JOptionPane.showMessageDialog(null,"String");
+                    label.setText(selected.toString());
+                }
+            }
+        });
+        panel.add(btn,BorderLayout.SOUTH);
+        panel.add(label, BorderLayout.CENTER);
+        return panel;
     }
 
     /**

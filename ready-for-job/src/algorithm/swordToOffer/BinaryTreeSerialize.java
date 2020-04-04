@@ -1,6 +1,6 @@
 package algorithm.swordToOffer;
 
-import algorithm.datastructure.TreeNode;
+import algorithm.datastructure.tree.TreeNode;
 
 /**
  * @author zhiwen.qi

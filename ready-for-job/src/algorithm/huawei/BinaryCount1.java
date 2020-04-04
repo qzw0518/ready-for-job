@@ -3,12 +3,26 @@ package algorithm.huawei;
 /**
  * @author zhiwen.qi
  * @description
+ * 题目描述
+ * 输入一个int型的正整数，计算出该int型数据在内存中存储时1的个数。
+ *
+ * 输入描述:
+ *  输入一个整数（int类型）
+ *
+ * 输出描述:
+ *  这个数转换成2进制后，输出1的个数
+ *
+ * 示例1
+ * 输入
+ * 5
+ * 输出
+ * 2
  * @date 2020/1/8
  */
 public class BinaryCount1 {
 
     public static void main(String[] args) {
-        int num = 19934318;
+        int num = 5;
         System.out.println(get1Count(num));
     }
 

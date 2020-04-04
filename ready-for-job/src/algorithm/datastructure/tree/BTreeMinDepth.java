@@ -1,4 +1,4 @@
-package algorithm.datastructure;
+package algorithm.datastructure.tree;
 
 /**
  * @author zhiwen.qi/qiwonder@163.com

@@ -12,13 +12,13 @@ public class Practice20Times {
     public static void main(String[] args) {
         int[] a = {9,6,4,12,5,7,9,1,10};
 //        new Practice20Times().quickSort(a,0,a.length-1);
-//        new Practice20Times().mergeSort(a,0,a.length-1);
+        new Practice20Times().mergeSort(a,0,a.length-1);
 //        new Practice20Times().bubbleSort(a);
-//        System.out.println(Arrays.toString(a));
+        System.out.println(Arrays.toString(a));
 //        System.out.println(binarySearchNoRecursion(a, 6));
 //        System.out.println(binarySearchRecursion(a, 6));
 //        System.out.println(dynamicFibonacci(4));
-        System.out.println(findIndexInFib(8));
+//        System.out.println(findIndexInFib(8));
     }
 
     /**
@@ -32,22 +32,24 @@ public class Practice20Times {
             int i = l;
             int j = r;
             int x = a[i];
-            while (i < j && a[j] > x) {
-                j--;
-            }
-            if (i < j) {
-                a[i] = a[j];
-                i++;
-            }
-            while (i < j && a[i] < x) {
-                i++;
-            }
-            if (i < j) {
-                a[j] = a[i];
-                j--;
+            while (i < j) {
+                while (i < j && a[j] > x) {
+                    j--;
+                }
+                if (i < j) {
+                    a[i] = a[j];
+                    i++;
+                }
+                while (i < j && a[i] < x) {
+                    i++;
+                }
+                if (i < j) {
+                    a[j] = a[i];
+                    j--;
+                }
             }
             a[i] = x;
-            quickSort(a, l , i - 1);
+            quickSort(a, l, i - 1);
             quickSort(a, i + 1, r);
         }
     }
@@ -59,13 +61,13 @@ public class Practice20Times {
      * @param r 结束下标
      */
     public void mergeSort(int[] a, int l, int r) {
-        if (a == null || a.length == 0 || l >= r) {
-            return;
-        }
-        int mid = (l + r) / 2;
-        mergeSort(a, l, mid);
-        mergeSort(a, mid + 1, r);
-        merge(a, l, mid, r);
+       if (a == null || a.length == 0 || l >= r) {
+           return;
+       }
+       int mid = (l + r) / 2;
+       mergeSort(a, l, mid);
+       mergeSort(a, mid + 1, r);
+       merge(a, l , mid, r);
     }
 
     /**
@@ -78,8 +80,8 @@ public class Practice20Times {
     private void merge(int[] a, int l, int mid, int r) {
         int i = l;
         int j = mid + 1;
-        int[] temp = new int[r - l + 1];
         int k = 0;
+        int[] temp = new int[r- l + 1];
         while (i <= mid && j <= r) {
             if (a[i] < a[j]) {
                 temp[k++] = a[i++];
@@ -103,9 +105,9 @@ public class Practice20Times {
      * @param a 数组
      */
     public static void bubbleSort(int[] a){
-        for (int i = a.length - 1; i >= 0; i--) {
+        for (int i = a.length - 1; i > 0 ; i--) {
             for (int j = 1; j <= i; j++) {
-                if (a[j - 1] > a[j]) {
+                if (a[j] < a[j - 1]) {
                     int temp = a[j];
                     a[j] = a[j - 1];
                     a[j - 1] = temp;
@@ -124,23 +126,21 @@ public class Practice20Times {
      */
     public static int binarySearchNoRecursion(int[] orderedArray, int target) {
         if (orderedArray == null || orderedArray.length == 0) {
+            throw new RuntimeException("given array is null or empty");
+        }
+        if (target < orderedArray[0] || target > orderedArray[orderedArray.length - 1]) {
             return -1;
         }
-        if (orderedArray[0] > target || orderedArray[orderedArray.length - 1] < target) {
-            return -1;
-        }
-        int left = 0;
-        int right = orderedArray.length - 1;
-        int mid = 0;
-        while (left <= right) {
-            mid = (left + right) / 2;
-            if (orderedArray[mid] == target) {
+        int l = 0;
+        int r = orderedArray.length;
+        while (l <= r) {
+            int mid = (l + r) / 2;
+            if (target == orderedArray[mid]) {
                 return mid;
-            }
-            if (orderedArray[mid] < target) {
-                left = mid + 1;
+            }else if (target > orderedArray[mid]) {
+                l = mid + 1;
             }else {
-                right = mid - 1;
+                r = mid - 1;
             }
         }
         return -1;
@@ -175,13 +175,12 @@ public class Practice20Times {
             return -1;
         }
         int mid = (left + right) / 2;
-        if (orderedArray[mid] == target) {
+        if (target == orderedArray[mid]) {
             return mid;
-        }
-        if (orderedArray[mid] > target) {
-            return getResult(orderedArray, left , mid - 1, target);
-        }else {
+        }else if (target > orderedArray[mid]) {
             return getResult(orderedArray, mid + 1, right, target);
+        }else {
+            return getResult(orderedArray, left, mid - 1, target);
         }
     }
 
@@ -191,21 +190,21 @@ public class Practice20Times {
      * @return 指定位置数。
      */
     public static int dynamicFibonacci(int index) {
-        if (index < 0) {
-            return -1;
+        if (index < 1) {
+            throw new RuntimeException("index not valid");
         }
-        if (index == 0 || index == 1) {
+        if (index == 1 || index == 2) {
             return 1;
         }
-        int result = 0;
         int fib1 = 1;
         int fib2 = 1;
-        for (int i = 2; i <= index; i++) {
-            result = fib1 + fib2;
+        int fib = -1;
+        for (int i = 3; i <= index ; i++) {
+            fib = fib1 + fib2;
             fib1 = fib2;
-            fib2 = result;
+            fib2 = fib;
         }
-        return result;
+        return fib;
     }
 
     /**

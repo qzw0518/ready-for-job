@@ -1,7 +1,5 @@
 package algorithm.datastructure.tree;
 
-import algorithm.datastructure.TreeNode;
-
 /**
  * @author zhiwen.qi
  * @description 二叉树遍历
